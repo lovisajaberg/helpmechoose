@@ -6,17 +6,49 @@
         <link href="./main.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>Help me choose between..</h1>
+        <h1 class="headline">Help me choose between..</h1>
         <img src="https://dehayf5mhw1h7.cloudfront.net/wp-content/uploads/sites/183/2017/10/23095453/hanging-pumpkins-for-halloween_1085-543.jpg" width="300">
         <div class="inputSection">
             <div class="inputs">
                 <input placeholder="Something"></input>
-                <input placeholder="Something"></input>
-                <input placeholder="Something"></input>
             </div>
             <button class="addOption">Add</button>
         </div>
-        <button>Go!</button>
+        <div class="resultSection"></div>
+        <button class="submit">Go!</button>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            $(function() {
+                $('.resultSection').hide()
+
+                var add_option = function() {
+                    $('.inputs').append('<input></input>')
+                }
+
+                var change_background = function() {
+                    $('body').css('background-image', 'none')
+                    $('body').css('background-color', 'orange')
+                }
+
+                $('.addOption').click(add_option)
+
+                $('.headline').click(change_background)
+
+                var options = []
+                var submit = function() {
+                    $('.inputSection').hide()
+                    $('.resultSection').css('display', 'flex')
+                    $('input').each(function() {
+                        options.push($(this).val())
+                    })
+                    var winner = options[Math.floor(Math.random() * options.length)]
+                    $('.resultSection').text(winner)
+                }
+
+                $('.submit').click(submit)
+            })
+        </script>
     </body>
 
 </html>
